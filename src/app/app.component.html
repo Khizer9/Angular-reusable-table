@@ -1,4 +1,4 @@
-<h1>{{ title }}</h1>
+<h1 style="text-align: center; color: #424242;">{{ title }}</h1>
 
 <!-- <div class="container"> -->
 <form [formGroup]="userPorfile" id="txtbox">
@@ -8,7 +8,7 @@
 </div>
 <br><br>
 
-<div class="row" style="display: flex;">
+<div class="row" style="display: flex; margin-left: 15%;">
   <div class="col-lg-4" style="flex: 1;">
     <mat-form-field class="example-full-width">
       <mat-label>Name</mat-label>
@@ -36,7 +36,7 @@
 
   </div>
 </div>
-<div class="row" style="display: flex;">
+<div class="row" style="display: flex; margin-left: 15%;">
   <div class="col-lg-4" style="flex: 1;">
 <mat-form-field class="example-full-width">
   <mat-label>Email</mat-label>
@@ -68,8 +68,9 @@
 </div>
 </div>
 <br /><br />
-
-<button mat-button type="submit" (click)="onSubmit()">Submit</button>
+<div style="text-align: center;">
+  <button mat-button color="warn" type="submit" (click)="onSubmit()">Submit</button>
+</div>
 
 </form>
 
@@ -86,28 +87,57 @@ class="container my-5 row-100 justify-content-center text-align-center table tab
     <th>Phone</th>
     <th>Edit</th>
     <th>Delete</th>
+    <th>Profile</th>
   </tr>
 
-  <tr *ngFor="let user of api.localData">
+  <tr *ngFor="let user of api.localData; let i = index">
     <td>{{ user.id }}</td>
     <td>{{ user.firstName }}</td>
     <td>{{ user.lastName }}</td>
     <td> {{ user.email }}</td>
     <td> {{ user.phone }}</td>
-    <td style="cursor: pointer;" class="text-center">
+    <td style="cursor: pointer;text-align: center;" class="text-center">
       <a
         class="btn btn-link btn-warning btn-just-icon edit"
         (click)="editUser(user.id)"
         ><i class="material-icons">edit</i></a
       >
     </td>
-    <td style="cursor: pointer;" class="text-center">
+    <td style="cursor: pointer;text-align: center;" class="text-center">
       <a
         class="btn btn-link btn-warning btn-just-icon edit"
-       (click)="delUser()"
+       (click)="delUser(i)"
         ><i class="material-icons">delete</i></a
+      >
+    </td>
+    <td style="cursor: pointer; text-align: center;" class="text-center">
+      <a
+        class="btn btn-link btn-warning btn-just-icon edit"
+       (click)="viewProf(user, i)"
+        ><i class="material-icons">add</i></a
       >
     </td>
   </tr>
 </table>
 </div>
+
+<hr>
+
+<h1>Dynamic Table Component</h1>
+<h2>Table one</h2>
+<app-table
+  [tableColumns]="tableColumns"
+  [tableData]="tableData">
+</app-table>
+<hr>
+<br><br>
+<hr>
+<app-table
+[tableColumns]="anotherTableColumns"
+[tableData]="anotherTableData"
+></app-table>
+<br>
+<hr>
+<br>
+
+<app-users></app-users>
